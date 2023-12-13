@@ -1,16 +1,26 @@
 mongodb-anonymizer
 ==================
 
-MongoDB anonymzer tool.
-Export your MongoDB database anonymized from source to target. Replace all sensitive data thanks to `faker`.
+## MongoDB anonymizer tool
+Export your MongoDB database anonymized from source to target. Replace all sensitive data.
+Thanks to `faker`.
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/mongodb-anonymizer.svg)](https://npmjs.org/package/mongodb-anonymizer)
 [![License](https://img.shields.io/npm/l/mongodb-anonymizer.svg)](https://github.com/rap2hpoutre/mongodb-anonymizer/blob/main/package.json)
+
+IMPORTANT: This tool does not copy/restore collection indexes.
 
 ## Usage
 
-Run this command by giving a source URI and target URI (no need to install first thanks to `npx`):
+Install project dependencies:
+
+```bash
+yarn install
+```
+
+Run this command by giving a source URI and target URI:
+
+> This command is going to fetch and copy all collections and related data from source database and insert them into the target database. If you don't provide any list of keys to be anonymized, the tool is going to use the default keys for anonymization: "email,name,description,address,city,country,phone,comment,birthdate"
 
 ```bash
 npx mongodb-anonymizer \
@@ -22,7 +32,9 @@ npx mongodb-anonymizer \
 
 ### Specify list of fields to anonymize
 
-Use `--list` option with a comma separated list of column name:
+Use `--list` option with a comma separated list of key name:
+
+> This command is going to anonymize the keys provided in the list argument for all collections which have these keys.
 
 ```bash
 npx mongodb-anonymizer  \
@@ -54,7 +66,7 @@ npx mongodb-anonymizer  \
   --list=firstName:faker.name.firstName,lastName:faker.name.lastName
 ```
 
-:point_right: You don't need to specify faker function since the command will try to find correct function via column name.
+:point_right: You don't need to specify faker function since the command will try to find correct function via key name.
 
 You can use plain text too for static replacements:
 ```bash
