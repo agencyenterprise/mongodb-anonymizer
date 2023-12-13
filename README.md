@@ -43,12 +43,6 @@ npx mongodb-anonymizer  \
   --list=email,firstName,lastName,phone
 ```
 
-Specifying another list via `--list` replace the default automatically anonymized values:
-
-```csv
-email,name,description,address,city,country,phone,comment,birthdate
-```
-
 You can also specify replacements for a specific collection:
 
 ```csv
